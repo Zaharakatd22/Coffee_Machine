@@ -36,18 +36,17 @@ def print_current_status(water_count: int,
     print(f"{milk_count} of milk")
     print(f"{beans_count} of coffee beans")
     print(f"{disposable_cups_count} of disposable cups")
-    print(f"{money_count} of money")
+    print(f"${money_count} of money")
     print()
 
 
-def check_ingredients_amount(coffee: int) -> bool:
+def check_ingredients_amount(coffee: str) -> bool:
     if curr_disposable_cups > 0:
         if coffee == "1":
             possible_water: int = curr_water // WATER_ESPRESSO
-            possible_milk: int = curr_milk // MILK_ESPRESSO
             possible_beans: int = curr_beans // BEANS_ESPRESSO
 
-            possible_cups = min(possible_water, possible_milk, possible_beans)
+            possible_cups = min(possible_water, possible_beans)
 
             if possible_cups > 0:
                 return True
@@ -74,11 +73,12 @@ def check_ingredients_amount(coffee: int) -> bool:
             return False
 
 
-def buy_coffee(coffee_type: int):
+def buy_coffee(coffee_type: str):
     global curr_water, curr_milk, curr_beans, curr_disposable_cups, curr_money
 
     if check_ingredients_amount(coffee_type):
         print("I have enough resources, making you a coffee!")
+        print()
 
         if coffee_type == "1":
             curr_water -= WATER_ESPRESSO
@@ -92,7 +92,7 @@ def buy_coffee(coffee_type: int):
             curr_beans -= BEANS_LATTE
             curr_disposable_cups -= 1
             curr_money += MONEY_LATTE
-        else:  # == "3"
+        else:  # == 3
             curr_water -= WATER_CAPPUCCINO
             curr_milk -= MILK_CAPPUCCINO
             curr_beans -= BEANS_CAPPUCCINO
@@ -100,6 +100,7 @@ def buy_coffee(coffee_type: int):
             curr_money += MONEY_CAPPUCCINO
     else:
         print("Sorry, not enough water!")
+        print()
 
 
 def fill_machine(add_water, add_milk, add_beans, add_disposable_cups):
@@ -123,9 +124,10 @@ while True:
                          "> ")
 
     if request == "buy":
-        coffee_type_request: int = int(input("What do you want to buy? 1 - espresso, 2 - latte, "
-                                             "3 - cappuccino, back - to main menu: \n "
-                                             "> "))
+        print()
+        coffee_type_request: str = input("What do you want to buy? 1 - espresso, 2 - latte, "
+                                         "3 - cappuccino, back - to main menu: \n "
+                                         "> ")
         if coffee_type_request != "back":
             buy_coffee(coffee_type_request)
     elif request == "fill":
