@@ -40,27 +40,66 @@ def print_current_status(water_count: int,
     print()
 
 
+def check_ingredients_amount(coffee: int) -> bool:
+    if curr_disposable_cups > 0:
+        if coffee == "1":
+            possible_water: int = curr_water // WATER_ESPRESSO
+            possible_milk: int = curr_milk // MILK_ESPRESSO
+            possible_beans: int = curr_beans // BEANS_ESPRESSO
+
+            possible_cups = min(possible_water, possible_milk, possible_beans)
+
+            if possible_cups > 0:
+                return True
+            return False
+        elif coffee == "2":
+            possible_water: int = curr_water // WATER_LATTE
+            possible_milk: int = curr_milk // MILK_LATTE
+            possible_beans: int = curr_beans // BEANS_LATTE
+
+            possible_cups = min(possible_water, possible_milk, possible_beans)
+
+            if possible_cups > 0:
+                return True
+            return False
+        else:  # == "3"
+            possible_water: int = curr_water // WATER_CAPPUCCINO
+            possible_milk: int = curr_milk // MILK_CAPPUCCINO
+            possible_beans: int = curr_beans // BEANS_CAPPUCCINO
+
+            possible_cups = min(possible_water, possible_milk, possible_beans)
+
+            if possible_cups > 0:
+                return True
+            return False
+
+
 def buy_coffee(coffee_type: int):
     global curr_water, curr_milk, curr_beans, curr_disposable_cups, curr_money
 
-    if coffee_type == "1":
-        curr_water -= WATER_ESPRESSO
-        curr_milk -= MILK_ESPRESSO
-        curr_beans -= BEANS_ESPRESSO
-        curr_disposable_cups -= 1
-        curr_money += MONEY_ESPRESSO
-    elif coffee_type == "2":
-        curr_water -= WATER_LATTE
-        curr_milk -= MILK_LATTE
-        curr_beans -= BEANS_LATTE
-        curr_disposable_cups -= 1
-        curr_money += MONEY_LATTE
-    else:  # == "3"
-        curr_water -= WATER_CAPPUCCINO
-        curr_milk -= MILK_CAPPUCCINO
-        curr_beans -= BEANS_CAPPUCCINO
-        curr_disposable_cups -= 1
-        curr_money += MONEY_CAPPUCCINO
+    if check_ingredients_amount(coffee_type):
+        print("I have enough resources, making you a coffee!")
+
+        if coffee_type == "1":
+            curr_water -= WATER_ESPRESSO
+            curr_milk -= MILK_ESPRESSO
+            curr_beans -= BEANS_ESPRESSO
+            curr_disposable_cups -= 1
+            curr_money += MONEY_ESPRESSO
+        elif coffee_type == "2":
+            curr_water -= WATER_LATTE
+            curr_milk -= MILK_LATTE
+            curr_beans -= BEANS_LATTE
+            curr_disposable_cups -= 1
+            curr_money += MONEY_LATTE
+        else:  # == "3"
+            curr_water -= WATER_CAPPUCCINO
+            curr_milk -= MILK_CAPPUCCINO
+            curr_beans -= BEANS_CAPPUCCINO
+            curr_disposable_cups -= 1
+            curr_money += MONEY_CAPPUCCINO
+    else:
+        print("Sorry, not enough water!")
 
 
 def fill_machine(add_water, add_milk, add_beans, add_disposable_cups):
@@ -84,9 +123,9 @@ while True:
                          "> ")
 
     if request == "buy":
-        coffee_type_request: str = input("What do you want to buy? 1 - espresso, 2 - latte, "
-                                         "3 - cappuccino, back - to main menu: \n "
-                                         "> ")
+        coffee_type_request: int = int(input("What do you want to buy? 1 - espresso, 2 - latte, "
+                                             "3 - cappuccino, back - to main menu: \n "
+                                             "> "))
         if coffee_type_request != "back":
             buy_coffee(coffee_type_request)
     elif request == "fill":
@@ -109,25 +148,3 @@ while True:
                              curr_money)
     else:  # == "exit"
         break
-
-# water_count: int = int(input("Write how many ml of water the coffee machine has: \n"
-#                              "> "))
-# milk_count: int = int(input("Write how many ml of milk the coffee machine has: \n"
-#                             "> "))
-# beans_count: int = int(input("Write how many grams of coffee beans the coffee machine has:: \n"
-#                              "> "))
-# cups_count: int = int(input("Write how many cups of coffee you will need:\n"
-#                             "> "))
-#
-# possible_water: int = water_count // WATERMACHIHE
-# possible_milk: int = milk_count // MILKMACHIHE
-# possible_beans: int = beans_count // BEANMACHINE
-#
-# possible_cups = min(possible_water, possible_milk, possible_beans)
-#
-# if cups_count == possible_cups:
-#     print("Yes, I can make that amount of coffee")
-# elif cups_count < possible_cups:
-#     print(f"Yes, I can make that amount of coffee (and even {possible_cups - cups_count} more than that)")
-# else:
-#     print(f"No, I can make only {possible_cups} cups of coffee")
