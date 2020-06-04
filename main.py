@@ -1,17 +1,17 @@
 # constants
-# type 1
+# type 1 (espresso)
 WATER_ESPRESSO: int = 250
 MILK_ESPRESSO: int = 0
 BEANS_ESPRESSO: int = 16
 MONEY_ESPRESSO: int = 4
 
-# type 2
+# type 2 (latte)
 WATER_LATTE: int = 350
 MILK_LATTE: int = 75
 BEANS_LATTE: int = 20
 MONEY_LATTE: int = 7
 
-# type 3
+# type 3 (cappuccino)
 WATER_CAPPUCCINO: int = 200
 MILK_CAPPUCCINO: int = 100
 BEANS_CAPPUCCINO: int = 12
@@ -146,5 +146,8 @@ while True:
                              curr_beans,
                              curr_disposable_cups,
                              curr_money)
-    else:  # == "exit"
+    elif request == "exit":
         break
+    else:
+        print("Please, print correct request!")
+        print()
