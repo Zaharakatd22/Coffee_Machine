@@ -80,13 +80,15 @@ def take_money():
 
 
 while True:
-    request: str = input("Write action (buy, fill, take): \n"
+    request: str = input("Write action (buy, fill, take, remaining, exit): \n"
                          "> ")
 
     if request == "buy":
-        coffee_type_request: str = input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino: \n"
+        coffee_type_request: str = input("What do you want to buy? 1 - espresso, 2 - latte, "
+                                         "3 - cappuccino, back - to main menu: \n "
                                          "> ")
-        buy_coffee(coffee_type_request)
+        if coffee_type_request != "back":
+            buy_coffee(coffee_type_request)
     elif request == "fill":
         count_add_water: int = int(input("Write how many ml of water do you want to add: \n"
                                          "> "))
@@ -105,7 +107,7 @@ while True:
                              curr_beans,
                              curr_disposable_cups,
                              curr_money)
-    else: # == "exit"
+    else:  # == "exit"
         break
 
 # water_count: int = int(input("Write how many ml of water the coffee machine has: \n"
