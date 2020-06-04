@@ -62,8 +62,6 @@ def buy_coffee(coffee_type: int):
         curr_disposable_cups -= 1
         curr_money += MONEY_CAPPUCCINO
 
-    print_current_status(curr_water, curr_milk, curr_beans, curr_disposable_cups, curr_money)
-
 
 def fill_machine(add_water, add_milk, add_beans, add_disposable_cups):
     global curr_water, curr_milk, curr_beans, curr_disposable_cups, curr_money
@@ -73,8 +71,6 @@ def fill_machine(add_water, add_milk, add_beans, add_disposable_cups):
     curr_beans += add_beans
     curr_disposable_cups += add_disposable_cups
 
-    print_current_status(curr_water, curr_milk, curr_beans, curr_disposable_cups, curr_money)
-
 
 def take_money():
     global curr_money
@@ -82,30 +78,35 @@ def take_money():
     print(f"I gave you ${curr_money}")
     curr_money = 0
 
-    print_current_status(curr_water, curr_milk, curr_beans, curr_disposable_cups, curr_money)
 
+while True:
+    request: str = input("Write action (buy, fill, take): \n"
+                         "> ")
 
-print_current_status(curr_water, curr_milk, curr_beans, curr_disposable_cups, curr_money)
-
-request: str = input("Write action (buy, fill, take): \n"
-                     "> ")
-
-if request == "buy":
-    coffee_type_request: str = input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino: \n"
-                                     "> ")
-    buy_coffee(coffee_type_request)
-elif request == "fill":
-    count_add_water: int = int(input("Write how many ml of water do you want to add: \n"
-                                     "> "))
-    count_add_milk: int = int(input("Write how many ml of milk do you want to add: \n"
-                                    "> "))
-    count_add_beans: int = int(input("Write how many grams of coffee beans do you want to add: \n"
-                                     "> "))
-    count_add_cups: int = int(input("Write how many disposable cups of coffee do you want to add: \n"
-                                    "> "))
-    fill_machine(count_add_water, count_add_milk, count_add_beans, count_add_cups)
-else:  # == "take"
-    take_money()
+    if request == "buy":
+        coffee_type_request: str = input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino: \n"
+                                         "> ")
+        buy_coffee(coffee_type_request)
+    elif request == "fill":
+        count_add_water: int = int(input("Write how many ml of water do you want to add: \n"
+                                         "> "))
+        count_add_milk: int = int(input("Write how many ml of milk do you want to add: \n"
+                                        "> "))
+        count_add_beans: int = int(input("Write how many grams of coffee beans do you want to add: \n"
+                                         "> "))
+        count_add_cups: int = int(input("Write how many disposable cups of coffee do you want to add: \n"
+                                        "> "))
+        fill_machine(count_add_water, count_add_milk, count_add_beans, count_add_cups)
+    elif request == "take":
+        take_money()
+    elif request == "remaining":
+        print_current_status(curr_water,
+                             curr_milk,
+                             curr_beans,
+                             curr_disposable_cups,
+                             curr_money)
+    else: # == "exit"
+        break
 
 # water_count: int = int(input("Write how many ml of water the coffee machine has: \n"
 #                              "> "))
