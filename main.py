@@ -1,63 +1,86 @@
 # constants
+# type 1
 WATER_ESPRESSO: int = 250
 MILK_ESPRESSO: int = 0
-BEAN_ESPRESSO: int = 16
+BEANS_ESPRESSO: int = 16
 MONEY_ESPRESSO: int = 4
 
+# type 2
 WATER_LATTE: int = 350
 MILK_LATTE: int = 75
-BEAN_LATTE: int = 20
+BEANS_LATTE: int = 20
 MONEY_LATTE: int = 7
 
+# type 3
 WATER_CAPPUCCINO: int = 200
 MILK_CAPPUCCINO: int = 100
-BEAN_CAPPUCCINO: int = 12
+BEANS_CAPPUCCINO: int = 12
 MONEY_CAPPUCCINO: int = 6
 
 # begin values
-begin_water: int = 400
-begin_milk: int = 540
-begin_beans: int = 120
-begin_disposable_cups: int = 9
-begin_money: int = 550
+curr_water: int = 400
+curr_milk: int = 540
+curr_beans: int = 120
+curr_disposable_cups: int = 9
+curr_money: int = 550
 
 
-def print_current_status(curr_water: int,
-                         curr_milk: int,
-                         curr_beans: int,
-                         curr_disposable_cups: int,
-                         curr_money: int):
+def print_current_status(water_count: int,
+                         milk_count: int,
+                         beans_count: int,
+                         disposable_cups_count: int,
+                         money_count: int):
     print("The coffee machine has:")
-    print(f"{curr_water} of water")
-    print(f"{curr_milk} of milk")
-    print(f"{curr_beans} of coffee beans")
-    print(f"{curr_disposable_cups} of disposable cups")
-    print(f"{curr_money} of money")
+    print(f"{water_count} of water")
+    print(f"{milk_count} of milk")
+    print(f"{beans_count} of coffee beans")
+    print(f"{disposable_cups_count} of disposable cups")
+    print(f"{money_count} of money")
     print()
 
 
-def buy_coffee():
-    coffee_type: str = input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino: \n"
-                             "> ")
+def buy_coffee(coffee_type: int):
+    global curr_water, curr_milk, curr_beans, curr_disposable_cups, curr_money
 
-    print_current_status(begin_water, begin_milk, begin_beans, begin_disposable_cups, begin_money)
+    if coffee_type == 1:
+        curr_water -= WATER_ESPRESSO
+        curr_milk -= MILK_ESPRESSO
+        curr_beans -= BEANS_ESPRESSO
+        curr_disposable_cups -= 1
+        curr_money += MONEY_ESPRESSO
+    elif coffee_type == 2:
+        curr_water -= WATER_LATTE
+        curr_milk -= MILK_LATTE
+        curr_beans -= BEANS_LATTE
+        curr_disposable_cups -= 1
+        curr_money += MONEY_LATTE
+    else:  # == 3
+        curr_water -= WATER_CAPPUCCINO
+        curr_milk -= MILK_CAPPUCCINO
+        curr_beans -= BEANS_CAPPUCCINO
+        curr_disposable_cups -= 1
+        curr_money += MONEY_CAPPUCCINO
+
+    print_current_status(curr_water, curr_milk, curr_beans, curr_disposable_cups, curr_money)
 
 
 def fill_machine():
-    print_current_status(begin_water, begin_milk, begin_beans, begin_disposable_cups, begin_money)
+    print_current_status(curr_water, curr_milk, curr_beans, curr_disposable_cups, curr_money)
 
 
 def take_money():
-    print_current_status(begin_water, begin_milk, begin_beans, begin_disposable_cups, begin_money)
+    print_current_status(curr_water, curr_milk, curr_beans, curr_disposable_cups, curr_money)
 
 
-print_current_status(begin_water, begin_milk, begin_beans, begin_disposable_cups, begin_money)
+print_current_status(curr_water, curr_milk, curr_beans, curr_disposable_cups, curr_money)
 
 request: str = input("Write action (buy, fill, take): \n"
                      "> ")
 
 if request == "buy":
-    buy_coffee()
+    coffee_type_request: str = input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino: \n"
+                                     "> ")
+    buy_coffee(coffee_type_request)
 elif request == "fill":
     fill_machine()
 else:  # == "take"
