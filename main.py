@@ -1,14 +1,32 @@
-# print("Starting to make a coffee")
-# print("Grinding coffee beans")
-# print("Boiling water")
-# print("Mixing boiled water with crushed coffee beans")
-# print("Pouring coffee into the cup")
-# print("Pouring some milk into the cup")
-# print("Coffee is ready!")
-
+# constants
 WATERMACHIHE: int = 200
 MILKMACHIHE: int = 50
 BEANMACHINE: int = 15
+
+
+# begin values
+begin_water: int = 400
+begin_milk: int = 540
+begin_beans: int = 120
+begin_disposable_cups: int = 9
+begin_money: int = 550
+
+
+def print_current_status(curr_water: int,
+                         curr_milk: int,
+                         curr_beans: int,
+                         curr_disposable_cups: int,
+                         curr_money: int):
+    print("The coffee machine has:")
+    print(f"{curr_water} of water")
+    print(f"{curr_milk} of milk")
+    print(f"{curr_beans} of coffee beans")
+    print(f"{curr_disposable_cups} of disposable cups")
+    print(f"{curr_money} of money")
+    print()
+
+
+print_current_status(begin_water, begin_milk, begin_beans, begin_disposable_cups, begin_money)
 
 
 water_count: int = int(input("Write how many ml of water the coffee machine has: \n"
