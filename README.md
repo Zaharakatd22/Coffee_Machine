@@ -2,4 +2,4 @@
 Coffee Machine administrate console program
 
 
-With thanks ещ HyperSkill and JetBrains
+With thanks to HyperSkill and JetBrains
