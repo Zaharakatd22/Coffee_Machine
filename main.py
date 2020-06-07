@@ -30,6 +30,22 @@ class CoffeeMachine:
         self.curr_beans: int = curr_beans
         self.curr_disposable_cups: int = curr_disposable_cups
         self.curr_money: int = curr_money
+        self.model = "Super-nano 209"
+
+    def __repr__(self):
+        return f"Coffee Machine runtime: stage - {self.stage}, coffee_type - {self.coffee_type};" \
+               f"Additional values: add_water - {self.add_water}, add_milk - {self.add_milk}," \
+               f" add_beans - {self.add_beans}," \
+               f" add_disposable_cups - {self.add_disposable_cups};" \
+               f"Current values: curr_water - {self.curr_water}, curr_milk - {self.curr_milk}," \
+               f" curr_beans - {self.curr_beans}, curr_disposable_cups - {self.curr_disposable_cups}," \
+               f" curr_money - {self.curr_money}."
+
+    def __str__(self):
+        return f"Coffee Machine '{self.model}' on stage {self.stage} with current count of ingredients: \n + " \
+               f"curr_water - {self.curr_water}, curr_milk - {self.curr_milk}," \
+               f" curr_beans - {self.curr_beans}, curr_disposable_cups - {self.curr_disposable_cups}," \
+               f" curr_money - {self.curr_money}."
 
     def processing_request(self, user_request, user_params):
         self.stage = user_request
@@ -47,6 +63,8 @@ class CoffeeMachine:
             self.take_money()
         elif self.stage == "remaining":
             self.print_current_status()
+
+        self.stage = request
 
     def buy_coffee(self):
 
@@ -131,6 +149,8 @@ class CoffeeMachine:
 
 params = []
 coffee_machine = CoffeeMachine(400, 540, 120, 9, 550)
+
+print("*" * 15)
 
 # coffee machine interface runtime
 while True:
